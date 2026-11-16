@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Look Divino | Salón de Belleza en Sucre</title>
+  <meta name="description" content="Salón de Belleza Look Divino en Sucre, Bolivia. Maquillaje, uñas, peinados, cortes, depilación, tratamientos y masajes capilares.">
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Colores tomados del logo (oro rosa) */
+      --morado: #a95f6b;
+      --morado-oscuro: #4a2a33;
+      --rosa: #d9948f;
+      --rosa-claro: #fbeeeb;
+      --dorado: #e8c3b3;
+      --texto: #43303a;
+      --blanco: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body {
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+      color: var(--texto); background: #fffaf9; line-height: 1.65;
+    }
+    h1, h2, h3.serif { font-family: "Playfair Display", Georgia, serif; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ---------- MENÚ ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(74,42,51,.97); backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    nav {
+      max-width: 1100px; margin: auto; padding: 10px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .marca { display: flex; align-items: center; gap: 10px; color: var(--blanco); }
+    .marca img { height: 50px; width: auto; border-radius: 10px; background: #fff; }
+    .marca .texto { font-family: "Playfair Display", serif; font-size: 1.45rem; font-weight: 700; }
+    .marca .texto span { color: var(--dorado); }
+    nav ul { list-style: none; display: flex; gap: 22px; }
+    nav ul a { color: #f3dfd9; font-size: .95rem; transition: color .2s; }
+    nav ul a:hover { color: var(--dorado); }
+    .hamburguesa {
+      display: none; background: none; border: 0; color: var(--blanco);
+      font-size: 1.8rem; cursor: pointer;
+    }
+
+    /* ---------- PORTADA ---------- */
+    .hero {
+      position: relative; color: var(--blanco); text-align: center;
+      padding: 110px 20px 120px; overflow: hidden;
+      background: linear-gradient(135deg, var(--morado-oscuro), var(--morado) 55%, var(--rosa));
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: url("images/portada.jpg") center/cover no-repeat;
+      opacity: .35;
+    }
+    .hero > div { position: relative; }
+    .hero .logo-grande {
+      width: min(300px, 70vw); height: auto; margin: 0 auto 22px; border-radius: 22px;
+      background: #fff; box-shadow: 0 12px 34px rgba(0,0,0,.35);
+    }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.15; margin-bottom: 12px; }
+    .hero h1 span { color: var(--dorado); }
+    .hero p { font-size: 1.15rem; max-width: 620px; margin: 0 auto 30px; }
+    .botones { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 28px; border-radius: 30px; font-weight: 600;
+      transition: transform .2s, box-shadow .2s; cursor: pointer; border: 0; font-family: inherit; font-size: 1rem;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+    .btn-principal { background: var(--dorado); color: var(--morado-oscuro); }
+    .btn-secundario { border: 2px solid var(--blanco); color: var(--blanco); background: transparent; }
+
+    /* ---------- SECCIONES ---------- */
+    section { padding: 80px 20px; }
+    .contenedor { max-width: 1100px; margin: auto; }
+    h2 { text-align: center; color: var(--morado-oscuro); font-size: 2.2rem; margin-bottom: 6px; }
+    .subtitulo { text-align: center; color: #7a6a85; margin-bottom: 38px; }
+    .linea { width: 70px; height: 4px; background: var(--rosa); margin: 0 auto 16px; border-radius: 2px; }
+
+    /* Animación al hacer scroll */
+    .aparece { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .aparece.visible { opacity: 1; transform: none; }
+
+    /* ---------- SOBRE NOSOTROS ---------- */
+    .sobre { background: var(--blanco); }
+    .sobre-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+    .sobre p { margin-bottom: 14px; }
+    .datos {
+      background: var(--rosa-claro); border-radius: 18px; padding: 28px;
+      display: grid; gap: 18px; text-align: center;
+    }
+    .datos strong { display: block; font-size: 1.9rem; color: var(--morado); font-family: "Playfair Display", serif; }
+    .datos small { color: #7a6a85; }
+
+    /* ---------- SERVICIOS ---------- */
+    .filtros { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
+    .filtro {
+      border: 2px solid var(--morado); background: transparent; color: var(--morado);
+      padding: 8px 18px; border-radius: 22px; cursor: pointer; font-size: .92rem; font-weight: 600; font-family: inherit;
+    }
+    .filtro.activo, .filtro:hover { background: var(--morado); color: var(--blanco); }
+    .categoria { margin-bottom: 34px; }
+    .categoria h3 {
+      color: var(--morado); font-size: 1.5rem; margin-bottom: 14px;
+      border-bottom: 2px solid var(--rosa); display: inline-block; padding-bottom: 2px;
+    }
+    .lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .servicio {
+      background: var(--blanco); border-radius: 14px; padding: 16px 18px;
+      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      box-shadow: 0 2px 10px rgba(169,95,107,.14); transition: transform .2s, box-shadow .2s;
+    }
+    .servicio:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(169,95,107,.22); }
+    .servicio .nombre { font-weight: 600; }
+    .servicio .tiempo { font-size: .85rem; color: #7a6a85; }
+    .servicio .precio { color: var(--morado); font-weight: 700; white-space: nowrap; font-size: 1.1rem; }
+
+    /* ---------- GALERÍA ---------- */
+    .galeria { background: var(--blanco); }
+    .galeria-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px;
+    }
+    .galeria-grid img {
+      width: 100%; height: 260px; object-fit: cover; border-radius: 14px; cursor: zoom-in;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .galeria-grid img:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+    .visor {
+      position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 100;
+      display: none; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out;
+    }
+    .visor.abierto { display: flex; }
+    .visor img { max-height: 90vh; max-width: 95vw; border-radius: 10px; }
+
+    /* ---------- UBICACIÓN ---------- */
+    .ubi-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 30px; }
+    .ficha { background: var(--rosa-claro); border-radius: 18px; padding: 30px; }
+    .ficha h3 { color: var(--morado-oscuro); margin-bottom: 14px; font-size: 1.5rem; }
+    .ficha p { margin-bottom: 10px; }
+    .mapa iframe { width: 100%; height: 100%; min-height: 330px; border: 0; border-radius: 18px; }
+
+    /* ---------- CONTACTO ---------- */
+    .contacto { background: linear-gradient(135deg, var(--morado-oscuro), var(--morado)); color: var(--blanco); text-align: center; }
+    .contacto h2 { color: var(--blanco); }
+    .contacto .subtitulo { color: #f3dfd9; }
+    .btn-whatsapp { background: #25d366; color: #fff; }
+    .redes { margin-top: 30px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .red {
+      padding: 10px 22px; border-radius: 24px; background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.35); font-weight: 500; transition: background .2s;
+    }
+    .red:hover { background: rgba(255,255,255,.28); }
+
+    footer { background: #2f1a21; color: #dcc3bd; text-align: center; padding: 24px 20px; font-size: .9rem; }
+
+    .flotante {
+      position: fixed; right: 18px; bottom: 18px; z-index: 60;
+      background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; box-shadow: 0 4px 14px rgba(0,0,0,.35);
+      animation: latido 2.4s infinite;
+    }
+    @keyframes latido { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+    /* ---------- CELULAR ---------- */
+    @media (max-width: 760px) {
+      .sobre-grid, .ubi-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 18px; }
+      .hamburguesa { display: block; }
+      nav ul {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0; background: var(--morado-oscuro);
+      }
+      nav ul.abierto { display: flex; }
+      nav ul li a { display: block; padding: 14px 24px; border-top: 1px solid rgba(255,255,255,.1); }
+      .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+      .galeria-grid img { height: 190px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MENÚ -->
+  <header>
+    <nav>
+      <a href="#inicio" class="marca">
+        <img src="logo.png" alt="Logo Look Divino" onerror="this.style.display='none'">
+        <span class="texto">Look <span>Divino</span></span>
+      </a>
+      <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú">☰</button>
+      <ul id="menu">
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li id="menuGaleria"><a href="#galeria">Galería</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- PORTADA -->
+  <div class="hero" id="inicio">
+    <div>
+      <img class="logo-grande" src="logo.png" alt="" onerror="this.style.display='none'">
+      <h1>Salón de belleza en <span>Sucre</span></h1>
+      <p>Maquillaje, uñas, peinados, cortes y más, con atención personalizada.</p>
+      <div class="botones">
+        <a href="#servicios" class="btn btn-principal">Ver servicios y precios</a>
+        <a id="btnReservar" class="btn btn-secundario" target="_blank" rel="noopener" href="#">Reservar mi cita</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBRE NOSOTROS -->
+  <section class="sobre" id="nosotros">
+    <div class="contenedor aparece">
+      <div class="linea"></div>
+      <h2>Sobre nosotros</h2>
+      <p class="subtitulo">Belleza y cuidado personal en el centro de Sucre</p>
+      <div class="sobre-grid">
+        <div>
+          <p>
+            Look Divino es un salón de belleza creado por una profesional con título de
+            <strong>Técnico Superior en Belleza Integral</strong>. Antes de abrir su propio salón,
+            trabajó en otros lugares del rubro, ganando experiencia y la confianza de sus clientes.
+          </p>
+          <p>
+            Comenzamos ofreciendo cortes de cabello, maquillaje y uñas. Con el tiempo fuimos
+            ampliando nuestros servicios según lo que nuestros clientes necesitaban, y hoy ofrecemos
+            una amplia variedad de tratamientos de belleza y cuidado personal.
+          </p>
+          <p>En Look Divino cada cliente recibe una atención directa y personalizada.</p>
+        </div>
+        <div class="datos">
+          <div><strong id="totalServicios">+40</strong><small>servicios disponibles</small></div>
+          <div><strong>Lun a Sáb</strong><small>9:00 a 21:00</small></div>
+          <div><strong>Sucre</strong><small>zona central</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <div class="contenedor">
+      <div class="linea"></div>
+      <h2>Servicios y precios</h2>
+      <p class="subtitulo">Precios en bolivianos (Bs.). Elige una categoría para filtrar.</p>
+      <div class="filtros" id="filtros"></div>
+      <div id="catalogo"></div>
+    </div>
+  </section>
+
+  <!-- GALERÍA (se oculta sola si no hay fotos) -->
+  <section class="galeria" id="galeria">
+    <div class="contenedor">
+      <div class="linea"></div>
+      <h2>Nuestros trabajos</h2>
+      <p class="subtitulo">Toca una foto para verla en grande</p>
+      <div class="galeria-grid" id="galeriaGrid"></div>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN -->
+  <section id="ubicacion">
+    <div class="contenedor aparece">
+      <div class="linea"></div>
+      <h2>Horario y ubicación</h2>
+      <p class="subtitulo">Encuéntranos en el centro de Sucre</p>
+      <div class="ubi-grid">
+        <div class="ficha">
+          <h3 class="serif">Visítanos</h3>
+          <p>📍 <strong>Dirección:</strong> Calle Urcullo N° 373, entre las calles Junín y Aniceto Arce.</p>
+          <p>🏙️ <strong>Ciudad:</strong> Sucre, Chuquisaca, Bolivia.</p>
+          <p>🕘 <strong>Horario:</strong> Lunes a Sábado, de 9:00 a 21:00.</p>
+          <p>📞 <strong>Teléfono / WhatsApp:</strong> <span id="telefonoTexto"></span></p>
+          <br>
+          <a id="btnComoLlegar" class="btn btn-principal" target="_blank" rel="noopener" href="#">
+            Cómo llegar
+          </a>
+        </div>
+        <div class="mapa">
+          <iframe id="mapaFrame" title="Mapa de Look Divino" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="contenedor aparece">
+      <div class="linea" style="background: var(--dorado)"></div>
+      <h2>Reserva tu cita</h2>
+      <p class="subtitulo">Escríbenos por WhatsApp y coordinamos tu horario</p>
+      <a id="btnWhatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener" href="#">💬 Escribir por WhatsApp</a>
+      <div class="redes" id="redes"></div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="anio"></span> Salón de Belleza Look Divino · Calle Urcullo N° 373, Sucre, Bolivia
+  </footer>
+
+  <a id="flotante" class="flotante" target="_blank" rel="noopener" href="#" aria-label="WhatsApp">💬</a>
+
+  <!-- Visor de fotos ampliadas -->
+  <div class="visor" id="visor"><img id="visorImg" alt="Foto ampliada"></div>
+
+  <script>
+    /* =====================================================
+       DATOS QUE PUEDES CAMBIAR
+       ===================================================== */
+
+    // Número con código de país, SIN el signo + ni espacios. Bolivia = 591
+    // Ejemplo: "59171234567"
+    const WHATSAPP = "59173410963";
+
+    // Cómo se ve el número escrito en la página
+    const TELEFONO_VISIBLE = "+591 73410963";
+
+    // Ubicación en Google Maps.
+    // Mientras estén vacíos, el mapa se arma con la dirección escrita.
+    // Si luego copias el enlace exacto de Google Maps, pégalo aquí:
+    const MAPA_LINK  = "";   // enlace de "Compartir" de Google Maps
+    const MAPA_EMBED = "";   // enlace "src" de "Insertar un mapa"
+    const DIRECCION_MAPA = "Calle Urcullo 373, Sucre, Bolivia";
+
+    const MENSAJE = "Hola, quiero reservar una cita en Look Divino.";
+
+    // Redes sociales: pega el enlace completo, o déjalo vacío "" para ocultarlo
+    const REDES = {
+      "Instagram": "",   // ejemplo: "https://www.instagram.com/lookdivino"
+      "Facebook":  "",   // ejemplo: "https://www.facebook.com/lookdivino"
+      "TikTok":    "https://www.tiktok.com/@ligem1218"
+    };
+
+    // Fotos de la galería: nombres de los archivos que pongas dentro de images/galeria/
+    // Ejemplo: ["foto1.jpg", "foto2.jpg", "novia1.jpg"]
+    const FOTOS = [
+      // "foto1.jpg",
+      // "foto2.jpg",
+    ];
+
+    // Catálogo de servicios: [nombre, duración, precio en Bs.]
+    const SERVICIOS = {
+      "Maquillaje": [
+        ["Social + Pestañas", "5 min", 100],
+        ["Folklórico", "1 h 30 min", 300],
+        ["Artístico", "1 h 30 min", 200],
+        ["Novias", "2 h", 700],
+        ["Quinceañeras", "2 h", 250],
+        ["Noches de Fiesta", "30 min", 130],
+        ["Pasarela / Editorial", "35 min", 200]
+      ],
+      "Uñas": [
+        ["Manicura", "30 min", 50],
+        ["Pintado Semi-permanente", "45 min", 80],
+        ["Pintado Capping (Gel / Rubber)", "1 h 30 min", 120],
+        ["Soft Gel", "2 h", 160],
+        ["Extensión en Gel", "3 h", 190],
+        ["Acrílicas", "3 h 30 min", 240]
+      ],
+      "Peinados": [
+        ["Social", "40 min", 70],
+        ["Gala", "1 h", 90],
+        ["Editorial", "1 h", 180],
+        ["Novias", "2 h", 700],
+        ["Quinceañeras", "2 h", 200]
+      ],
+      "Cortes": [
+        ["Recto", "30 min", 50],
+        ["Redondo", "30 min", 50],
+        ["En V", "30 min", 50],
+        ["Sacado de Puntas", "30 min", 50],
+        ["Degrafilado", "45 min", 50],
+        ["Wolfcut", "30 min", 50],
+        ["Pixie", "45 min", 70],
+        ["Bob", "30 min", 50],
+        ["Corte Mariposa", "45 min", 50]
+      ],
+      "Diseño de Mirada": [
+        ["Henna", "20 min", 80],
+        ["Perfilado de Cejas", "20 min", 20],
+        ["Visagismo", "1 h", 120]
+      ],
+      "Depilación": [
+        ["Facial", "30 min", 70],
+        ["Corporal", "1 h 30 min", 350],
+        ["Bikini", "30 min", 100]
+      ],
+      "Tratamientos": [
+        ["Baño de Luna Corporal", "3 h", 350],
+        ["Baño de Luna Seccionado", "30 min", 80]
+      ],
+      "Masajes Capilares": [
+        ["Hidratación", "45 min", 180],
+        ["Nutrición", "45 min", 180],
+        ["Restauración", "1 h 30 min", 250],
+        ["Fortalecimiento", "1 h 30 min", 250]
+      ]
+    };
+
+    /* =====================================================
+       CÓDIGO (no necesitas tocar de aquí para abajo)
+       ===================================================== */
+
+    // Servicios
+    const filtros = document.getElementById("filtros");
+    const catalogo = document.getElementById("catalogo");
+
+    function dibujar(categoriaActiva) {
+      catalogo.innerHTML = "";
+      Object.keys(SERVICIOS).forEach(cat => {
+        if (categoriaActiva !== "Todos" && categoriaActiva !== cat) return;
+        const bloque = document.createElement("div");
+        bloque.className = "categoria";
+        bloque.innerHTML = '<h3 class="serif">' + cat + "</h3>";
+        const lista = document.createElement("div");
+        lista.className = "lista";
+        SERVICIOS[cat].forEach(([nombre, tiempo, precio]) => {
+          lista.innerHTML +=
+            '<div class="servicio"><div><div class="nombre">' + nombre +
+            '</div><div class="tiempo">⏱ ' + tiempo +
+            '</div></div><div class="precio">' + precio + " Bs.</div></div>";
+        });
+        bloque.appendChild(lista);
+        catalogo.appendChild(bloque);
+      });
+    }
+
+    ["Todos", ...Object.keys(SERVICIOS)].forEach((cat, i) => {
+      const b = document.createElement("button");
+      b.className = "filtro" + (i === 0 ? " activo" : "");
+      b.textContent = cat;
+      b.onclick = () => {
+        document.querySelectorAll(".filtro").forEach(x => x.classList.remove("activo"));
+        b.classList.add("activo");
+        dibujar(cat);
+      };
+      filtros.appendChild(b);
+    });
+    dibujar("Todos");
+
+    document.getElementById("totalServicios").textContent =
+      Object.values(SERVICIOS).reduce((s, l) => s + l.length, 0);
+
+    // WhatsApp y teléfono
+    const enlace = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MENSAJE);
+    ["btnWhatsapp", "flotante", "btnReservar"].forEach(id => document.getElementById(id).href = enlace);
+    document.getElementById("telefonoTexto").textContent = TELEFONO_VISIBLE;
+
+    // Mapa
+    const consulta = encodeURIComponent(DIRECCION_MAPA);
+    document.getElementById("mapaFrame").src =
+      MAPA_EMBED || ("https://www.google.com/maps?q=" + consulta + "&output=embed");
+    document.getElementById("btnComoLlegar").href =
+      MAPA_LINK || ("https://www.google.com/maps/search/?api=1&query=" + consulta);
+
+    // Redes sociales
+    const contRedes = document.getElementById("redes");
+    Object.entries(REDES).forEach(([nombre, url]) => {
+      if (!url) return;
+      const a = document.createElement("a");
+      a.className = "red"; a.href = url; a.textContent = nombre;
+      a.target = "_blank"; a.rel = "noopener";
+      contRedes.appendChild(a);
+    });
+
+    // Galería
+    const seccionGaleria = document.getElementById("galeria");
+    const grid = document.getElementById("galeriaGrid");
+    const visor = document.getElementById("visor");
+    const visorImg = document.getElementById("visorImg");
+    if (FOTOS.length === 0) {
+      seccionGaleria.style.display = "none";
+      document.getElementById("menuGaleria").style.display = "none";
+    } else {
+      FOTOS.forEach(nombre => {
+        const img = document.createElement("img");
+        img.src = "images/galeria/" + nombre;
+        img.alt = "Trabajo realizado en Look Divino";
+        img.loading = "lazy";
+        img.onclick = () => { visorImg.src = img.src; visor.classList.add("abierto"); };
+        grid.appendChild(img);
+      });
+    }
+    visor.onclick = () => visor.classList.remove("abierto");
+
+    // Menú en celular
+    const menu = document.getElementById("menu");
+    document.getElementById("hamburguesa").onclick = () => menu.classList.toggle("abierto");
+    menu.querySelectorAll("a").forEach(a => a.onclick = () => menu.classList.remove("abierto"));
+
+    // Animación al hacer scroll
+    const obs = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+    }), { threshold: 0.12 });
+    document.querySelectorAll(".aparece").forEach(el => obs.observe(el));
+
+    document.getElementById("anio").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
