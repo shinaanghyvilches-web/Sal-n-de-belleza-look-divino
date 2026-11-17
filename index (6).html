@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Look Divino | Salón de Belleza en Sucre</title>
+  <meta name="description" content="Salón de Belleza Look Divino en Sucre, Bolivia. Maquillaje, uñas, peinados, cortes, depilación, tratamientos y masajes capilares.">
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --morado: #a95f6b;
+      --morado-oscuro: #4a2a33;
+      --rosa: #d9948f;
+      --rosa-claro: #fbeeeb;
+      --dorado: #e8c3b3;
+      --texto: #43303a;
+      --blanco: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+      color: var(--texto); background: #fffaf9; line-height: 1.65;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    h1, h2, h3.serif { font-family: "Playfair Display", Georgia, serif; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    main { flex: 1; }
+
+    /* ---------- MENÚ ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(74,42,51,.97); backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    nav {
+      max-width: 1100px; margin: auto; padding: 10px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .marca { display: flex; align-items: center; gap: 10px; color: var(--blanco); }
+    .marca img { height: 50px; width: auto; border-radius: 10px; background: #fff; }
+    .marca .texto { font-family: "Playfair Display", serif; font-size: 1.45rem; font-weight: 700; }
+    .marca .texto span { color: var(--dorado); }
+    nav ul { list-style: none; display: flex; gap: 22px; align-items: center; }
+    nav ul a { color: #f3dfd9; font-size: .95rem; transition: color .2s; padding-bottom: 3px; border-bottom: 2px solid transparent; }
+    nav ul a:hover { color: var(--dorado); }
+    nav ul a.activo { color: var(--dorado); border-bottom-color: var(--dorado); }
+    nav ul a.nav-reservar { background: var(--dorado); color: var(--morado-oscuro); padding: 7px 18px; border-radius: 22px; font-weight: 600; border: 0; }
+    nav ul a.nav-reservar:hover, nav ul a.nav-reservar.activo { background: #fff; color: var(--morado-oscuro); }
+    .hamburguesa { display: none; background: none; border: 0; color: var(--blanco); font-size: 1.8rem; cursor: pointer; }
+
+    /* ---------- PESTAÑAS (vistas) ---------- */
+    .vista { display: none; }
+    .vista.activa { display: block; animation: entra .5s ease; }
+    @keyframes entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    /* ---------- INICIO ---------- */
+    .hero {
+      position: relative; color: var(--blanco); text-align: center;
+      padding: 110px 20px 120px; overflow: hidden;
+      background: linear-gradient(135deg, var(--morado-oscuro), var(--morado) 55%, var(--rosa));
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: url("portada.jpg") center/cover no-repeat; opacity: .35;
+    }
+    .hero > div { position: relative; }
+    .hero .logo-grande {
+      width: min(300px, 70vw); height: auto; margin: 0 auto 22px; border-radius: 22px;
+      background: #fff; box-shadow: 0 12px 34px rgba(0,0,0,.35);
+    }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.15; margin-bottom: 12px; }
+    .hero p { font-size: 1.15rem; max-width: 620px; margin: 0 auto 30px; }
+    .botones { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 28px; border-radius: 30px; font-weight: 600;
+      transition: transform .2s, box-shadow .2s; cursor: pointer; border: 0; font-family: inherit; font-size: 1rem;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+    .btn-principal { background: var(--dorado); color: var(--morado-oscuro); }
+    .btn-secundario { border: 2px solid var(--blanco); color: var(--blanco); background: transparent; }
+    .btn-whatsapp { background: #25d366; color: #fff; }
+    .btn-rosa { background: var(--morado); color: #fff; }
+
+    /* ---------- SECCIONES ---------- */
+    section { padding: 70px 20px; }
+    .contenedor { max-width: 1100px; margin: auto; }
+    h2 { text-align: center; color: var(--morado-oscuro); font-size: 2.2rem; margin-bottom: 6px; }
+    .subtitulo { text-align: center; color: #7a6a85; margin-bottom: 38px; }
+    .linea { width: 70px; height: 4px; background: var(--rosa); margin: 0 auto 16px; border-radius: 2px; }
+    .wa-icon { width: 1.25em; height: 1.25em; fill: currentColor; vertical-align: -0.25em; margin-right: 6px; }
+    .flotante .wa-icon { width: 34px; height: 34px; margin: 0; vertical-align: 0; }
+
+    /* ---------- NOSOTROS ---------- */
+    .nos-intro { background: linear-gradient(135deg, var(--morado-oscuro), var(--morado)); color: #fff; text-align: center; padding: 70px 20px; }
+    .nos-intro h2 { color: #fff; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.2; margin-bottom: 14px; }
+    .nos-intro h2 span { color: var(--dorado); }
+    .nos-intro p { max-width: 680px; margin: 0 auto; font-size: 1.1rem; color: #f8e8e3; }
+    .sobre { background: var(--blanco); }
+    .sobre-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+    .sobre p { margin-bottom: 14px; }
+    .sobre h3 { font-size: 1.7rem; color: var(--morado-oscuro); margin-bottom: 14px; }
+    .datos { background: var(--rosa-claro); border-radius: 18px; padding: 28px; display: grid; gap: 18px; text-align: center; }
+    .datos strong { display: block; font-size: 1.9rem; color: var(--morado); font-family: "Playfair Display", serif; }
+    .datos small { color: #7a6a85; }
+    .valores { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+    .valor { background: #fff; border-radius: 18px; padding: 28px 22px; text-align: center; box-shadow: 0 4px 16px rgba(169,95,107,.15); }
+    .valor .ico { font-size: 2.2rem; margin-bottom: 8px; }
+    .valor h3 { font-family: "Playfair Display", serif; color: var(--morado); font-size: 1.25rem; margin-bottom: 6px; }
+    .cta-final { text-align: center; background: var(--rosa-claro); }
+    .cta-final h2 { margin-bottom: 10px; }
+    .cta-final p { margin-bottom: 24px; }
+
+    /* ---------- SERVICIOS ---------- */
+    .cat-card { background: #fff; border-radius: 18px; box-shadow: 0 3px 14px rgba(169,95,107,.16); margin-bottom: 18px; overflow: hidden; }
+    .cat-cab { display: flex; align-items: center; gap: 16px; padding: 14px 18px; cursor: pointer; }
+    .cat-portada {
+      width: 78px; height: 78px; border-radius: 14px; flex: none; overflow: hidden;
+      background: linear-gradient(135deg, var(--rosa), var(--morado)); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 2rem; position: relative;
+    }
+    .cat-portada img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .cat-info { flex: 1; min-width: 0; }
+    .cat-info h3 { font-family: "Playfair Display", serif; color: var(--morado-oscuro); font-size: 1.45rem; line-height: 1.2; }
+    .cat-info small { color: #7a6a85; }
+    .btn-mas {
+      border: 2px solid var(--morado); background: transparent; color: var(--morado);
+      padding: 8px 18px; border-radius: 22px; cursor: pointer; font-weight: 600; font-family: inherit; font-size: .92rem; white-space: nowrap;
+    }
+    .btn-mas:hover, .cat-card.abierta .btn-mas { background: var(--morado); color: #fff; }
+    .cat-cuerpo { display: none; padding: 4px 18px 22px; border-top: 1px solid var(--rosa-claro); }
+    .cat-card.abierta .cat-cuerpo { display: block; animation: entra .4s ease; }
+    .sub-tit { color: var(--morado); font-weight: 600; margin: 18px 0 10px; }
+    .lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; align-items: start; }
+    .servicio {
+      background: var(--rosa-claro); border-radius: 14px; padding: 14px 16px;
+      display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+    }
+    .servicio .fila { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .servicio .nombre { font-weight: 600; }
+    .servicio .tiempo { font-size: .85rem; color: #7a6a85; }
+    .servicio .precio { color: var(--morado); font-weight: 700; white-space: nowrap; font-size: 1.1rem; }
+    .servicio .btn-res {
+      align-self: flex-start; background: var(--morado); color: #fff; border: 0; border-radius: 20px;
+      padding: 6px 16px; font-size: .85rem; font-weight: 600; cursor: pointer; font-family: inherit;
+    }
+    .servicio .btn-res:hover { background: var(--morado-oscuro); }
+    .servicio.con-foto { padding: 0; gap: 0; background: #fff; box-shadow: 0 2px 10px rgba(169,95,107,.14); }
+    .servicio.con-foto img { width: 100%; height: 230px; object-fit: cover; object-position: center 25%; cursor: zoom-in; background: var(--rosa-claro); }
+    .servicio.con-foto .fila, .servicio.con-foto .btn-res { margin: 0 16px; }
+    .servicio.con-foto .fila { margin-top: 12px; }
+    .servicio.con-foto .btn-res { margin-bottom: 14px; margin-top: 10px; }
+    .fotos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+    .fotos-grid figure { position: relative; border-radius: 14px; overflow: hidden; cursor: zoom-in; background: var(--rosa-claro); transition: transform .3s, box-shadow .3s; }
+    .fotos-grid figure:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+    .fotos-grid img { width: 100%; height: 260px; object-fit: cover; object-position: center 25%; }
+    .fotos-grid figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 24px 12px 10px; color: #fff; font-weight: 600; font-size: .9rem; background: linear-gradient(to top, rgba(74,42,51,.85), transparent); }
+    .visor { position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out; }
+    .visor.abierto { display: flex; }
+    .visor img { max-height: 90vh; max-width: 95vw; border-radius: 10px; }
+
+    /* ---------- RESERVAR ---------- */
+    .form-caja { max-width: 560px; margin: auto; background: #fff; border-radius: 20px; padding: 32px 28px; box-shadow: 0 6px 24px rgba(169,95,107,.18); }
+    .campo { margin-bottom: 18px; }
+    .campo label { display: block; font-weight: 600; color: var(--morado-oscuro); margin-bottom: 6px; }
+    .campo input, .campo select {
+      width: 100%; padding: 12px 14px; border: 2px solid var(--dorado); border-radius: 12px;
+      font-family: inherit; font-size: 1rem; color: var(--texto); background: #fffdfc;
+    }
+    .campo input:focus, .campo select:focus { outline: none; border-color: var(--morado); }
+    .campo small { color: #7a6a85; display: block; margin-top: 4px; }
+    .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .error { color: #b3261e; font-size: .92rem; margin-bottom: 12px; min-height: 1.2em; }
+    .resumen { background: var(--rosa-claro); border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; font-size: .95rem; display: none; }
+    .resumen.ver { display: block; }
+    .form-caja .btn { width: 100%; }
+    .nota { text-align: center; font-size: .85rem; color: #7a6a85; margin-top: 12px; }
+
+    /* ---------- UBICACIÓN ---------- */
+    .ubi-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 30px; }
+    .ficha { background: var(--rosa-claro); border-radius: 18px; padding: 30px; }
+    .ficha h3 { color: var(--morado-oscuro); margin-bottom: 14px; font-size: 1.5rem; }
+    .ficha p { margin-bottom: 10px; }
+    .mapa iframe { width: 100%; height: 100%; min-height: 330px; border: 0; border-radius: 18px; }
+    .contacto { background: linear-gradient(135deg, var(--morado-oscuro), var(--morado)); color: var(--blanco); text-align: center; }
+    .contacto h2 { color: var(--blanco); }
+    .contacto .subtitulo { color: #f3dfd9; }
+    .redes { margin-top: 30px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .red { padding: 10px 22px; border-radius: 24px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.35); font-weight: 500; transition: background .2s; }
+    .red:hover { background: rgba(255,255,255,.28); }
+
+    footer { background: #2f1a21; color: #dcc3bd; text-align: center; padding: 24px 20px; font-size: .9rem; }
+    .flotante {
+      position: fixed; right: 18px; bottom: 18px; z-index: 60;
+      background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.35); animation: latido 2.4s infinite;
+    }
+    @keyframes latido { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+    @media (max-width: 760px) {
+      .sobre-grid, .ubi-grid, .dos { grid-template-columns: 1fr; }
+      section { padding: 50px 18px; }
+      .hamburguesa { display: block; }
+      nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--morado-oscuro); }
+      nav ul.abierto { display: flex; }
+      nav ul li a { display: block; padding: 14px 24px; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 0; }
+      nav ul a.nav-reservar { border-radius: 0; background: transparent; color: var(--dorado); padding: 14px 24px; }
+      .cat-cab { flex-wrap: wrap; }
+      .cat-portada { width: 64px; height: 64px; }
+      .btn-mas { width: 100%; }
+      .fotos-grid { grid-template-columns: repeat(2, 1fr); }
+      .fotos-grid img { height: 210px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#inicio" class="marca">
+        <img src="logo.png" alt="Logo Look Divino" onerror="this.style.display='none'">
+        <span class="texto">Look <span>Divino</span></span>
+      </a>
+      <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú">☰</button>
+      <ul id="menu">
+        <li><a href="#inicio" data-vista="inicio">Inicio</a></li>
+        <li><a href="#nosotros" data-vista="nosotros">Nosotros</a></li>
+        <li><a href="#servicios" data-vista="servicios">Servicios</a></li>
+        <li><a href="#ubicacion" data-vista="ubicacion">Ubicación</a></li>
+        <li><a href="#reservar" data-vista="reservar" class="nav-reservar">Reservar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ INICIO ============ -->
+    <div class="vista" id="v-inicio">
+      <div class="hero">
+        <div>
+          <img class="logo-grande" src="logo.png" alt="" onerror="this.style.display='none'">
+          <h1>Salón de belleza</h1>
+          <p>Maquillaje, uñas, peinados, cortes y más, con atención personalizada.</p>
+          <div class="botones">
+            <a href="#servicios" class="btn btn-principal">Ver servicios y precios</a>
+            <a href="#reservar" class="btn btn-secundario">Reservar mi cita</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ NOSOTROS ============ -->
+    <div class="vista" id="v-nosotros">
+      <div class="nos-intro">
+        <div class="contenedor">
+          <div class="linea" style="background: var(--dorado)"></div>
+          <h2>Tu belleza, en manos de una <span>profesional</span></h2>
+          <p>Cuidado personal con experiencia, confianza y atención directa para que te veas y te sientas divina.</p>
+        </div>
+      </div>
+
+      <section class="sobre">
+        <div class="contenedor">
+          <div class="sobre-grid">
+            <div>
+              <h3 class="serif">Nuestra historia</h3>
+              <p>
+                Look Divino nació de la mano de una profesional con título de
+                <strong>Técnico Superior en Belleza Integral</strong>. Antes de abrir su propio salón,
+                trabajó en otros lugares del rubro, ganando experiencia y, sobre todo, la confianza de sus clientes.
+              </p>
+              <p>
+                Empezamos con cortes de cabello, maquillaje y uñas. Con el tiempo fuimos creciendo
+                según lo que nuestros clientes necesitaban, y hoy ofrecemos una amplia variedad de
+                tratamientos de belleza y cuidado personal, todo en un solo lugar.
+              </p>
+              <p><strong>Aquí cada cliente recibe una atención directa y personalizada.</strong> Tú eres quien nos inspira a seguir creciendo.</p>
+            </div>
+            <div class="datos">
+              <div><strong id="totalServicios">+40</strong><small>servicios disponibles</small></div>
+              <div><strong>Lun a Sáb</strong><small>9:00 a 21:00</small></div>
+              <div><strong>Sucre</strong><small>zona central</small></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="contenedor">
+          <div class="linea"></div>
+          <h2>¿Por qué elegirnos?</h2>
+          <p class="subtitulo">Lo que hace especial a Look Divino</p>
+          <div class="valores">
+            <div class="valor"><div class="ico">🎓</div><h3>Formación profesional</h3><p>Técnico Superior en Belleza Integral, con experiencia en el rubro.</p></div>
+            <div class="valor"><div class="ico">🤝</div><h3>Atención personalizada</h3><p>Escuchamos lo que quieres y lo hacemos realidad, de forma directa.</p></div>
+            <div class="valor"><div class="ico">💅</div><h3>Todo en un solo lugar</h3><p>Maquillaje, uñas, peinados, cortes, depilación, tratamientos y masajes capilares.</p></div>
+            <div class="valor"><div class="ico">⭐</div><h3>Confianza ganada</h3><p>Clientes que vuelven porque saben que su imagen está en buenas manos.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-final">
+        <div class="contenedor">
+          <h2>Es tu momento de lucir divina</h2>
+          <p>Reserva tu cita y déjanos cuidar de ti.</p>
+          <a href="#reservar" class="btn btn-rosa">Reservar mi cita</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ SERVICIOS ============ -->
+    <div class="vista" id="v-servicios">
+      <section>
+        <div class="contenedor">
+          <div class="linea"></div>
+          <h2>Servicios y precios</h2>
+          <p class="subtitulo">Precios en bolivianos (Bs.). Presiona <strong>Ver más</strong> para ver los servicios y las fotos de nuestros trabajos.</p>
+          <div id="catalogo"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ RESERVAR ============ -->
+    <div class="vista" id="v-reservar">
+      <section>
+        <div class="contenedor">
+          <div class="linea"></div>
+          <h2>Reserva tu cita</h2>
+          <p class="subtitulo">Llena tus datos y te llevamos a WhatsApp para confirmar tu horario</p>
+          <div class="form-caja">
+            <div class="campo">
+              <label for="rNombre">Tu nombre</label>
+              <input id="rNombre" type="text" placeholder="Ej: María Pérez" autocomplete="name">
+            </div>
+            <div class="campo">
+              <label for="rServicio">Servicio</label>
+              <select id="rServicio"></select>
+            </div>
+            <div class="dos">
+              <div class="campo">
+                <label for="rFecha">Fecha</label>
+                <input id="rFecha" type="date">
+              </div>
+              <div class="campo">
+                <label for="rHora">Hora (opcional)</label>
+                <input id="rHora" type="time" min="09:00" max="21:00">
+              </div>
+            </div>
+            <div class="resumen" id="rResumen"></div>
+            <div class="error" id="rError"></div>
+            <button class="btn btn-whatsapp" id="rEnviar" type="button">
+              <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#iconoWA"/></svg>Enviar reserva por WhatsApp
+            </button>
+            <p class="nota">Atendemos de lunes a sábado, de 9:00 a 21:00. Tu cita queda confirmada cuando la propietaria te responda.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ UBICACIÓN ============ -->
+    <div class="vista" id="v-ubicacion">
+      <section>
+        <div class="contenedor">
+          <div class="linea"></div>
+          <h2>Horario y ubicación</h2>
+          <p class="subtitulo">Encuéntranos en el centro de Sucre</p>
+          <div class="ubi-grid">
+            <div class="ficha">
+              <h3 class="serif">Visítanos</h3>
+              <p>📍 <strong>Dirección:</strong> Calle Urcullo N° 373, entre las calles Junín y Aniceto Arce.</p>
+              <p>🏙️ <strong>Ciudad:</strong> Sucre, Chuquisaca, Bolivia.</p>
+              <p>🕘 <strong>Horario:</strong> Lunes a Sábado, de 9:00 a 21:00.</p>
+              <p>📞 <strong>Teléfono / WhatsApp:</strong> <span id="telefonoTexto"></span></p>
+              <br>
+              <a id="btnComoLlegar" class="btn btn-principal" target="_blank" rel="noopener" href="#">Cómo llegar</a>
+            </div>
+            <div class="mapa">
+              <iframe id="mapaFrame" title="Mapa de Look Divino" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="contacto">
+        <div class="contenedor">
+          <div class="linea" style="background: var(--dorado)"></div>
+          <h2>Contáctanos</h2>
+          <p class="subtitulo">Escríbenos por WhatsApp o síguenos en redes</p>
+          <a id="btnWhatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener" href="#"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#iconoWA"/></svg>Escribir por WhatsApp</a>
+          <div class="redes" id="redes"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="anio"></span> Salón de Belleza Look Divino · Calle Urcullo N° 373, Sucre, Bolivia
+  </footer>
+
+  <a id="flotante" class="flotante" target="_blank" rel="noopener" href="#" aria-label="WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#iconoWA"/></svg></a>
+
+  <div class="visor" id="visor"><img id="visorImg" alt="Foto ampliada"></div>
+
+  <!-- Icono de WhatsApp reutilizable -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs><path id="iconoWA" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></defs>
+  </svg>
+
+  <script>
+    /* =====================================================
+       DATOS QUE PUEDES CAMBIAR
+       ===================================================== */
+
+    // Número de la propietaria con código de país, SIN + ni espacios. Bolivia = 591
+    const WHATSAPP = "59173410963";
+    const TELEFONO_VISIBLE = "+591 73410963";
+
+    // Mapa: si luego copias el enlace exacto de Google Maps, pégalo aquí
+    const MAPA_LINK  = "";
+    const MAPA_EMBED = "";
+    const DIRECCION_MAPA = "Calle Urcullo 373, Sucre, Bolivia";
+
+    const MENSAJE = "Hola, quiero reservar una cita en Look Divino.";
+
+    // Redes sociales: enlace completo, o "" para ocultarlo
+    const REDES = {
+      "Instagram": "",
+      "Facebook":  "",
+      "TikTok":    "https://www.tiktok.com/@ligem1218"
+    };
+
+    // Dónde están las fotos. "" = en el mismo lugar que index.html
+    const CARPETA_FOTOS = "";
+
+    // Fotos EXTRA de trabajos, que salen al presionar "Ver más" en cada categoría.
+    // Formato: ["archivo.jpg", "Categoría", "Texto sobre la foto"]
+    // La categoría debe escribirse igual que en SERVICIOS (Maquillaje, Uñas, Peinados, Cortes...)
+    // Ejemplo: ["maquillaje-1.jpg", "Maquillaje", "Maquillaje social"],
+    const FOTOS = [
+    ];
+
+    // Iconos de cada categoría (se ven mientras no haya foto de portada)
+    const ICONOS_CAT = {
+      "Maquillaje": "💄", "Uñas": "💅", "Peinados": "👰", "Cortes": "✂️",
+      "Diseño de Mirada": "👁️", "Depilación": "🌸", "Tratamientos": "🌙", "Masajes Capilares": "💆‍♀️"
+    };
+
+    // Servicios: ["nombre", "duración", precio en Bs., "foto.jpg"]
+    // Cada servicio YA tiene escrito el nombre de su foto. Para que la foto aparezca:
+    //   1) ponle a tu foto ese nombre exacto (minúsculas, sin espacios, sin tildes, con .jpg)
+    //   2) súbela a GitHub, junto a index.html.
+    // Si la foto todavía no está subida, el servicio se ve igual, sin foto, y no se rompe nada.
+    // La foto de portada de cada categoría es la del PRIMER servicio de la lista.
+    const SERVICIOS = {
+      "Maquillaje": [
+        ["Social + Pestañas", "5 min", 100, "maquillaje-social.jpg"],
+        ["Folklórico", "1 h 30 min", 300, "maquillaje-folklorico.jpg"],
+        ["Artístico", "1 h 30 min", 200, "maquillaje-artistico.jpg"],
+        ["Novias", "2 h", 700, "maquillaje-novias.jpg"],
+        ["Quinceañeras", "2 h", 250, "maquillaje-quinceaneras.jpg"],
+        ["Noches de Fiesta", "30 min", 130, "maquillaje-noche-de-fiesta.jpg"],
+        ["Pasarela / Editorial", "35 min", 200, "maquillaje-editorial.jpg"]
+      ],
+      "Uñas": [
+        ["Manicura", "30 min", 50, "unas-manicura.jpg"],
+        ["Pintado Semi-permanente", "45 min", 80, "unas-semipermanente.jpg"],
+        ["Pintado Capping (Gel / Rubber)", "1 h 30 min", 120, "unas-capping.jpg"],
+        ["Soft Gel", "2 h", 160, "unas-soft-gel.jpg"],
+        ["Extensión en Gel", "3 h", 190, "unas-extension-gel.jpg"],
+        ["Acrílicas", "3 h 30 min", 240, "unas-acrilicas.jpg"]
+      ],
+      "Peinados": [
+        ["Social", "40 min", 70, "peinados-social.jpg"],
+        ["Gala", "1 h", 90, "peinados-gala.jpg"],
+        ["Editorial", "1 h", 180, "peinados-editorial.jpg"],
+        ["Novias", "2 h", 700, "peinados-novias.jpg"],
+        ["Quinceañeras", "2 h", 200, "peinados-quinceaneras.jpg"]
+      ],
+      "Cortes": [
+        ["Recto", "30 min", 50, "cortes-recto.jpg"],
+        ["Redondo", "30 min", 50, "cortes-redondo.jpg"],
+        ["En V", "30 min", 50, "cortes-en-v.jpg"],
+        ["Sacado de Puntas", "30 min", 50, "cortes-sacado-de-puntas.jpg"],
+        ["Degrafilado", "45 min", 50, "cortes-degrafilado.jpg"],
+        ["Wolfcut", "30 min", 50, "cortes-wolfcut.jpg"],
+        ["Pixie", "45 min", 70, "cortes-pixie.jpg"],
+        ["Bob", "30 min", 50, "cortes-bob.jpg"],
+        ["Corte Mariposa", "45 min", 50, "cortes-mariposa.jpg"]
+      ],
+      "Diseño de Mirada": [
+        ["Henna", "20 min", 80, "mirada-henna.jpg"],
+        ["Perfilado de Cejas", "20 min", 20, "mirada-perfilado-cejas.jpg"],
+        ["Visagismo", "1 h", 120, "mirada-visagismo.jpg"]
+      ],
+      "Depilación": [
+        ["Facial", "30 min", 70, "depilacion-facial.jpg"],
+        ["Corporal", "1 h 30 min", 350, "depilacion-corporal.jpg"],
+        ["Bikini", "30 min", 100, "depilacion-bikini.jpg"]
+      ],
+      "Tratamientos": [
+        ["Baño de Luna Corporal", "3 h", 350, "tratamientos-bano-luna-corporal.jpg"],
+        ["Baño de Luna Seccionado", "30 min", 80, "tratamientos-bano-luna-seccionado.jpg"]
+      ],
+      "Masajes Capilares": [
+        ["Hidratación", "45 min", 180, "masajes-hidratacion.jpg"],
+        ["Nutrición", "45 min", 180, "masajes-nutricion.jpg"],
+        ["Restauración", "1 h 30 min", 250, "masajes-restauracion.jpg"],
+        ["Fortalecimiento", "1 h 30 min", 250, "masajes-fortalecimiento.jpg"]
+      ]
+    };
+
+    /* =====================================================
+       CÓDIGO (no necesitas tocar de aquí para abajo)
+       ===================================================== */
+
+    const visor = document.getElementById("visor");
+    const visorImg = document.getElementById("visorImg");
+    function ampliar(src) { visorImg.src = src; visor.classList.add("abierto"); }
+    visor.onclick = () => visor.classList.remove("abierto");
+
+    // ---------- Pestañas ----------
+    const VISTAS = ["inicio", "nosotros", "servicios", "reservar", "ubicacion"];
+    function mostrarVista() {
+      let v = location.hash.slice(1);
+      if (!VISTAS.includes(v)) v = "inicio";
+      VISTAS.forEach(n => document.getElementById("v-" + n).classList.toggle("activa", n === v));
+      document.querySelectorAll("#menu a").forEach(a => a.classList.toggle("activo", a.dataset.vista === v));
+      document.getElementById("menu").classList.remove("abierto");
+      window.scrollTo(0, 0);
+    }
+    window.addEventListener("hashchange", mostrarVista);
+    document.getElementById("hamburguesa").onclick = () => document.getElementById("menu").classList.toggle("abierto");
+
+    // ---------- Servicios por categoría ----------
+    const fotos = FOTOS.map(f => Array.isArray(f)
+      ? { archivo: f[0], cat: f[1] || "", titulo: f[2] || "" }
+      : { archivo: f, cat: "", titulo: "" });
+
+    const catalogo = document.getElementById("catalogo");
+
+    Object.keys(SERVICIOS).forEach(cat => {
+      const lista = SERVICIOS[cat];
+      const extras = fotos.filter(f => f.cat === cat);
+      const desde = Math.min(...lista.map(s => s[2]));
+      const portadaArchivo = (lista.find(s => s[3]) || [])[3] || (extras[0] || {}).archivo;
+
+      const card = document.createElement("article");
+      card.className = "cat-card";
+
+      const cab = document.createElement("div");
+      cab.className = "cat-cab";
+      const portada = document.createElement("div");
+      portada.className = "cat-portada";
+      portada.textContent = ICONOS_CAT[cat] || "✨";
+      if (portadaArchivo) {
+        const im = document.createElement("img");
+        im.src = CARPETA_FOTOS + portadaArchivo; im.alt = cat; im.loading = "lazy";
+        im.onerror = () => im.remove();
+        portada.appendChild(im);
+      }
+      const info = document.createElement("div");
+      info.className = "cat-info";
+      info.innerHTML = '<h3>' + cat + '</h3><small>' + lista.length + ' servicios · desde ' + desde + ' Bs.</small>';
+      const btn = document.createElement("button");
+      btn.className = "btn-mas"; btn.type = "button"; btn.textContent = "Ver más ▾";
+      cab.append(portada, info, btn);
+
+      const cuerpo = document.createElement("div");
+      cuerpo.className = "cat-cuerpo";
+      const grid = document.createElement("div");
+      grid.className = "lista";
+      lista.forEach(([nombre, tiempo, precio, foto]) => {
+        const s = document.createElement("div");
+        s.className = "servicio" + (foto ? " con-foto" : "");
+        if (foto) {
+          const img = document.createElement("img");
+          img.src = CARPETA_FOTOS + foto; img.alt = nombre + " - Look Divino"; img.loading = "lazy";
+          img.onerror = () => { img.remove(); s.classList.remove("con-foto"); };
+          img.onclick = () => ampliar(img.src);
+          s.appendChild(img);
+        }
+        const fila = document.createElement("div");
+        fila.className = "fila";
+        fila.innerHTML = '<div><div class="nombre">' + nombre + '</div><div class="tiempo">⏱ ' + tiempo +
+          '</div></div><div class="precio">' + precio + ' Bs.</div>';
+        const r = document.createElement("button");
+        r.className = "btn-res"; r.type = "button"; r.textContent = "Reservar";
+        r.onclick = () => {
+          document.getElementById("rServicio").value = cat + " | " + nombre;
+          location.hash = "#reservar";
+          actualizarResumen();
+        };
+        s.append(fila, r);
+        grid.appendChild(s);
+      });
+      cuerpo.appendChild(grid);
+
+      if (extras.length) {
+        const t = document.createElement("div");
+        t.className = "sub-tit"; t.textContent = "Nuestros trabajos";
+        const fg = document.createElement("div");
+        fg.className = "fotos-grid";
+        extras.forEach(f => {
+          const fig = document.createElement("figure");
+          const img = document.createElement("img");
+          img.src = CARPETA_FOTOS + f.archivo; img.alt = (f.titulo || cat) + " - Look Divino"; img.loading = "lazy";
+          img.onerror = () => fig.remove();
+          fig.appendChild(img);
+          if (f.titulo) { const c = document.createElement("figcaption"); c.textContent = f.titulo; fig.appendChild(c); }
+          fig.onclick = () => ampliar(img.src);
+          fg.appendChild(fig);
+        });
+        cuerpo.append(t, fg);
+      }
+
+      card.append(cab, cuerpo);
+      const alternar = () => {
+        const abierta = card.classList.toggle("abierta");
+        btn.textContent = abierta ? "Ver menos ▴" : "Ver más ▾";
+      };
+      btn.onclick = e => { e.stopPropagation(); alternar(); };
+      cab.onclick = alternar;
+      catalogo.appendChild(card);
+    });
+
+    document.getElementById("totalServicios").textContent =
+      Object.values(SERVICIOS).reduce((s, l) => s + l.length, 0);
+
+    // ---------- Reserva ----------
+    const rServicio = document.getElementById("rServicio");
+    const rNombre = document.getElementById("rNombre");
+    const rFecha = document.getElementById("rFecha");
+    const rHora = document.getElementById("rHora");
+    const rError = document.getElementById("rError");
+    const rResumen = document.getElementById("rResumen");
+
+    rServicio.innerHTML = '<option value="">Elige un servicio...</option>';
+    Object.keys(SERVICIOS).forEach(cat => {
+      const g = document.createElement("optgroup");
+      g.label = cat;
+      SERVICIOS[cat].forEach(([nombre, tiempo, precio]) => {
+        const o = document.createElement("option");
+        o.value = cat + " | " + nombre;
+        o.textContent = nombre + " — " + precio + " Bs.";
+        g.appendChild(o);
+      });
+      rServicio.appendChild(g);
+    });
+
+    const hoy = new Date();
+    rFecha.min = hoy.getFullYear() + "-" + String(hoy.getMonth() + 1).padStart(2, "0") + "-" + String(hoy.getDate()).padStart(2, "0");
+
+    function datosServicio() {
+      if (!rServicio.value) return null;
+      const [cat, nombre] = rServicio.value.split(" | ");
+      const s = SERVICIOS[cat].find(x => x[0] === nombre);
+      return { cat, nombre, tiempo: s[1], precio: s[2] };
+    }
+    function fechaBonita(v) {
+      const [a, m, d] = v.split("-").map(Number);
+      const f = new Date(a, m - 1, d);
+      const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+      return { texto: dias[f.getDay()] + " " + String(d).padStart(2, "0") + "/" + String(m).padStart(2, "0") + "/" + a, domingo: f.getDay() === 0 };
+    }
+    function actualizarResumen() {
+      const s = datosServicio();
+      if (!s) { rResumen.classList.remove("ver"); return; }
+      rResumen.innerHTML = "<strong>" + s.cat + " – " + s.nombre + "</strong><br>⏱ " + s.tiempo + " · 💰 " + s.precio + " Bs.";
+      rResumen.classList.add("ver");
+    }
+    rServicio.onchange = actualizarResumen;
+
+    document.getElementById("rEnviar").onclick = () => {
+      rError.textContent = "";
+      const nombre = rNombre.value.trim();
+      const s = datosServicio();
+      if (!nombre) { rError.textContent = "Escribe tu nombre."; rNombre.focus(); return; }
+      if (!s) { rError.textContent = "Elige el servicio que quieres."; rServicio.focus(); return; }
+      if (!rFecha.value) { rError.textContent = "Elige la fecha de tu cita."; rFecha.focus(); return; }
+      const f = fechaBonita(rFecha.value);
+      if (f.domingo) { rError.textContent = "Los domingos no atendemos. Elige de lunes a sábado."; rFecha.focus(); return; }
+      if (rFecha.value < rFecha.min) { rError.textContent = "Elige una fecha desde hoy en adelante."; rFecha.focus(); return; }
+      if (rHora.value && (rHora.value < "09:00" || rHora.value > "21:00")) { rError.textContent = "Nuestro horario es de 9:00 a 21:00."; rHora.focus(); return; }
+
+      let msg = MENSAJE + "\n\n" +
+        "👤 Nombre: " + nombre + "\n" +
+        "💇 Servicio: " + s.cat + " – " + s.nombre + " (" + s.precio + " Bs.)\n" +
+        "📅 Fecha: " + f.texto;
+      if (rHora.value) msg += "\n🕘 Hora: " + rHora.value;
+      window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+    };
+
+    // ---------- WhatsApp, teléfono, mapa ----------
+    const enlace = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MENSAJE);
+    ["btnWhatsapp", "flotante"].forEach(id => document.getElementById(id).href = enlace);
+    document.getElementById("telefonoTexto").textContent = TELEFONO_VISIBLE;
+
+    const consulta = encodeURIComponent(DIRECCION_MAPA);
+    document.getElementById("mapaFrame").src = MAPA_EMBED || ("https://www.google.com/maps?q=" + consulta + "&output=embed");
+    document.getElementById("btnComoLlegar").href = MAPA_LINK || ("https://www.google.com/maps/search/?api=1&query=" + consulta);
+
+    // ---------- Redes ----------
+    const ICONOS = {
+      "TikTok": "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z",
+      "Instagram": "M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z",
+      "Facebook": "M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"
+    };
+    const contRedes = document.getElementById("redes");
+    Object.entries(REDES).forEach(([nombre, url]) => {
+      if (!url) return;
+      const a = document.createElement("a");
+      a.className = "red"; a.href = url; a.target = "_blank"; a.rel = "noopener";
+      a.innerHTML = (ICONOS[nombre] ? '<svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="' + ICONOS[nombre] + '"/></svg>' : "") + nombre;
+      contRedes.appendChild(a);
+    });
+
+    document.getElementById("anio").textContent = new Date().getFullYear();
+    mostrarVista();
+  </script>
+</body>
+</html>
